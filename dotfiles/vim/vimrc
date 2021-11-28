@@ -1,0 +1,74 @@
+"" 
+""    _            .                                               
+""   u            @88>                                             
+""  88Nu.   u.    %8P      ..    .     :       .u    .             
+"" '88888.o888c    .     .888: x888  x888.   .d88B :@8c        .   
+""  ^8888  8888  .@88u  ~`8888~'888X`?888f` ="8888f8888r  .udR88N  
+""   8888  8888 ''888E`   X888  888X '888>    4888>'88"  <888'888k 
+""   8888  8888   888E    X888  888X '888>    4888> '    9888 'Y"  
+""   8888  8888   888E    X888  888X '888>    4888>      9888      
+""  .8888b.888P   888E    X888  888X '888>   .d888L .+   9888      
+""   ^Y8888*""    888&   "*88%""*88" '888!`  ^"8888*"    ?8888u../ 
+""     `Y"        R888"    `~    "    `"`       "Y"       "8888P'  
+""                 ""                                       "P'    
+""	          _______________________________________
+""   	       /                                       \
+""	      ~<@ zombii's vimrc for word processing 2021 @>~
+""           \_______________________________________/
+""
+""
+""
+" Plugin directory
+call plug#begin('~/.vim/plugged')
+
+" Plugin list
+Plug 'tpope/vim-sensible'
+Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/limelight.vim'
+
+call plug#end()
+
+" Jump to last position when reopening a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Some settings
+filetype plugin indent on
+syntax enable
+set showcmd
+set showmatch
+set mouse=a
+set tabstop=2
+set softtabstop=0 noexpandtab
+set shiftwidth=2
+set ruler
+set cmdheight=1
+set backspace=indent,eol,start
+set history=200
+set nolist
+set autoindent
+set linebreak
+set nocompatible
+set number
+"set thesaurus+=/home/zombii/.vim/thesaurus.txt
+" Goyo mode switch
+map <F9> :Goyo <bar> <CR>
+nnoremap <F2> :set invpaste paste?<CR>
+set showmode
+nnoremap s <Nop>
+let mapleader = ","
+
+" Spell checking
+
+map <F6> :setlocal spell! spelllang=de<CR>
+map <F5> :setlocal spell! Spelllang=en_us<CR>
+map <leader>ss :setlocal spell!<cr>
+
+" Open .md files as markdown
+autocmd BufEnter,BufRead,BufNewFile *.md set filetype=markdown
+
+" PDF output
+
+map <F5> :!pandoc % -o %:t:r.pdf<cr>
